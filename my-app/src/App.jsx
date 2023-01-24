@@ -54,6 +54,8 @@ function App() {
   }
 
   const removeFromTeam = (name) => {
+
+
     // remove pokemon from team array
     const newTeamArray = [];
     team.forEach((i) => {
@@ -79,6 +81,7 @@ function App() {
         </Grid>
       )
     }
+    console.log(team.length)
     return content;
   }
 
@@ -109,12 +112,8 @@ function App() {
           <Toolbar />
           <Grid container spacing={2} padding={2} justifyContent="center">
 
-            {catalog.map((pokemon) =>
-              <Grid item>
-                <PokemonCard key={pokemon} pokemonName={pokemon} add={addToTeam} remove={removeFromTeam} onTeam={false} count={team.length}/>
-              </Grid>
-            )}
-            
+            {/* TODO: insert pokemon catalog */}
+
           </Grid>
         </Box>
 
@@ -142,11 +141,7 @@ function App() {
           >
             <h1>Your Team</h1>
 
-            {team.map((pokemon) =>
-              <Grid item>
-                <PokemonCard key={pokemon + "team"} pokemonName={pokemon} add={addToTeam} remove={removeFromTeam} onTeam={true} count={team.length}/>
-              </Grid>
-            )}
+            {/* TODO: insert team pokemon */}
 
             {createTemplateCards()}
 
