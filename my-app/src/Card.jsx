@@ -18,14 +18,14 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const baseUrl = "https://pokeapi.co/api/v2/"
 
-const PokemonCard = ({ pokemonName, add, remove, onTeam, count }) => {
+// TODO: pass card props
+const PokemonCard = ({ }) => {
 
   ////////////////// COMPONENT STATES ///////////////////////////////////
 
   const [loaded, setLoaded] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [favorited, setFavorited] = useState(onTeam);
-
+  const [favorited, setFavorited] = useState(false);
 
   ////////////////// CARD STATES ////////////////////////////////////////
 
@@ -38,14 +38,7 @@ const PokemonCard = ({ pokemonName, add, remove, onTeam, count }) => {
   ////////////////// HELPER FUNCTIONS ////////////////////////////////////
 
   const changeSelection = () => {
-    if (count < 3) {
-      setFavorited(!favorited)
-    }
-    if (favorited) {
-      remove(pokemonName);
-    } else {
-      add(pokemonName);
-    }
+    // TODO: change card's status
   };
 
   ////////////////// AXIOS CALL ///////////////////////////////////////////
@@ -55,26 +48,7 @@ const PokemonCard = ({ pokemonName, add, remove, onTeam, count }) => {
   })
 
   const getDetails = async () => {
-    if (!loaded) {
-      await axios.get(baseUrl + "pokemon/" + pokemonName.toLowerCase())
-        .then(response => {
-          setMoves(response.data['moves'].slice(0, 5));
-          setAbilities(response.data['abilities']);
-          setTypes(response.data['types'])
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-
-      await axios.get(baseUrl + "pokemon-species/" + pokemonName.toLowerCase())
-        .then(response => {
-          setDescription(response.data['flavor_text_entries'].slice(0, 1));
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-      setLoaded(true);
-    }
+    // TODO: use axios to make API call
   }
 
 
@@ -102,7 +76,7 @@ const PokemonCard = ({ pokemonName, add, remove, onTeam, count }) => {
     <Card sx={{ width: 250 }}
       style={{ backgroundColor: "#bad1cd" }}>
       <CardHeader
-        title={pokemonName}
+      // TODO: set title
 
       />
 
@@ -111,35 +85,32 @@ const PokemonCard = ({ pokemonName, add, remove, onTeam, count }) => {
         component="img"
         height="150"
         width="150"
-        image={"./images/" + pokemonName + ".png"}
         style={{ backgroundColor: "#92B181" }}
         sx={{ padding: "1em 1em 1em 1em", objectFit: "contain" }}
-        alt={pokemonName}
+
+      // TODO: set correct pokemon image
       />
 
       {/* ///////////////// TYPE INFO ////////////////// */}
+
       <CardContent>
-        {types.map((t) =>
-          <img
-            src={"./images/types/" + t['type']['name'].toUpperCase() + ".png"}
-            height="25"
-          />
-        )}
+
+        {/* TODO: get types and display their respective images */}
+
       </CardContent>
 
       {/* ///////////////// BUTTONS ////////////////// */}
+
       <CardActions disableSpacing>
+
+        {/* TODO: add button functionality, change button based on status  */}
         <IconButton
           aria-label="add to favorites"
-          onClick={changeSelection}
         >
-          {favorited ? (
-            <FavoriteIcon
-              style={{ color: "#C6878F" }} />
-          ) : (
-            <FavoriteBorder />
-          )}
+          <FavoriteBorder />
         </IconButton>
+
+
 
         <ExpandMore
           expand={expanded}
@@ -153,31 +124,32 @@ const PokemonCard = ({ pokemonName, add, remove, onTeam, count }) => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
 
         {/* ///////////////// MORE DETAILS ////////////////// */}
+
         <CardContent>
           <Typography paragraph>
+
             DESCRIPTION: <br></br>
-            {description.map(
-              (m) => m['flavor_text'].replace(/^[\w.-]$/g, " "))}
+
+            {/* TODO: insert description of pokemon */}
 
           </Typography>
+
           <Typography paragraph>
+
             MOVES: <br></br>
-            {moves.map((m) =>
-              <div>
-                {m['move']['name'].charAt(0).toUpperCase() +
-                  m['move']['name'].slice(1)}
-              </div>
-            )}
+
+            {/* TODO: insert moves of pokemon */}
+            
           </Typography>
+
           <Typography paragraph>
+
             ABILITIES: <br></br>
-            {abilities.map((a) =>
-              <div>
-                {a['ability']['name'].charAt(0).toUpperCase() +
-                  a['ability']['name'].slice(1)}
-              </div>
-            )}
+
+            {/* TODO: insert abilities of pokemon */}
+
           </Typography>
+
         </CardContent>
       </Collapse>
     </Card>

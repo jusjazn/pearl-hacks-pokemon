@@ -33,41 +33,14 @@ function App() {
   ////////////////// ADD & REMOVE FUNCTIONS ///////////////////////////////////
   
   const addToTeam = (name) => {
-    if (team.length >= 3) {
-      alert("You're only allowed three pokemon!")
+    // TODO: add pokemon to the team, remove it back to catalog
+    // any edge cases to consider?
 
-    } else {
-      // adding pokemon to team array
-      setTeam([
-        ...team,
-        name
-      ])
-
-      // removing pokemon from catalog array
-      const newCatalogArray = [];
-      catalog.forEach((i) => {
-        if (i !== name) newCatalogArray.push(i);
-      })
-      setCatalog(newCatalogArray);
-
-    }
   }
 
   const removeFromTeam = (name) => {
+    // TODO: remove pokemon from the team, add it back to catalog
 
-
-    // remove pokemon from team array
-    const newTeamArray = [];
-    team.forEach((i) => {
-      if (i !== name) newTeamArray.push(i);
-    })
-    setTeam(newTeamArray);
-
-    // add pokemon back to catalog
-    setCatalog([
-      ...catalog,
-      name
-    ]);
   };
 
   ////////////////// HELPER FUNCTION ///////////////////////////////////
